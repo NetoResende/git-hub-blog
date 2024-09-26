@@ -70,3 +70,23 @@ export const AsideContent = styled.aside`
     }
   }
 `;
+
+export const PublicattedContent = styled.div`
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+
+  margin-top: 4em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  p {
+    color: ${props=>props.theme.colors["base-subtitle"]};
+    font-size: 1.5rem;
+  }
+  span {
+    color: ${props=>props.theme.colors["base-span"]}
+  }
+`;
