@@ -15,6 +15,7 @@ export const FormContent = styled.form`
    background: ${props=>props.theme.colors["base-input"]};
    border: 1px solid ${props => props.theme.colors["base-label"]};
    margin-top: 1rem;
+   color: ${props => props.theme.colors["base-text"]};
    &::placeholder {
     color: ${props => props.theme.colors["base-label"]};
    }

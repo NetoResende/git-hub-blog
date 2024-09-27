@@ -1,5 +1,12 @@
 import { ArrowSquareOut, Buildings, GithubLogo, Users } from "phosphor-react";
-import { AsideContent, ProfileContainer, ProfileContent, PublicattedContent } from "./styled";
+import {
+  AsideContent,
+  MainContainer,
+  MainContent,
+  ProfileContainer,
+  ProfileContent,
+  PublicattedContent,
+} from "./styled";
 import { FormInput } from "./components/Form";
 
 export function Home() {
@@ -45,7 +52,49 @@ export function Home() {
         <p>Publicações</p>
         <span>5 Publicações</span>
       </PublicattedContent>
-      <FormInput/>
+      <FormInput />
+      <MainContainer>
+        <MainContent>
+          <header>
+            <p>JavaScript data types and data structures</p>
+            <span>há 2 dia</span>
+          </header>
+          <strong>
+            Lorem t onsectetur minima vel. Labore exercitationem impedit
+            incidunt consectetur iure nesciunt natus?
+          </strong>
+        </MainContent>
+        <MainContent>
+          <header>
+            <p>JavaScript data types and data structures</p>
+            <span>há 2 dia</span>
+          </header>
+          <strong>
+            Lorem t onsectetur minima vel. Labore exercitationem impedit
+            incidunt consectetur iure nesciunt natus?
+          </strong>
+        </MainContent>
+        <MainContent>
+          <header>
+            <p>JavaScript data types and data structures</p>
+            <span>há 2 dia</span>
+          </header>
+          <strong>
+            Lorem t onsectetur minima vel. Labore exercitationem impedit
+            incidunt consectetur iure nesciunt natus?
+          </strong>
+        </MainContent>
+        <MainContent>
+          <header>
+            <p>JavaScript data types and data structures</p>
+            <span>há 2 dia</span>
+          </header>
+          <strong>
+            Lorem t onsectetur minima vel. Labore exercitationem impedit
+            incidunt consectetur iure nesciunt natus?
+          </strong>
+        </MainContent>
+      </MainContainer>
 
     </div>
   );

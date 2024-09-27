@@ -90,3 +90,51 @@ export const PublicattedContent = styled.div`
     color: ${props=>props.theme.colors["base-span"]}
   }
 `;
+
+export const MainContainer = styled.main`
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    margin-top: 2rem;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  
+`;
+
+export const MainContent = styled.div`
+  background: ${props =>props.theme.colors["base-post"]};
+  border-radius: 6px;
+  padding: 3rem;
+  border: 0;
+
+    header {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+    
+      p {
+        width: 300px;
+        color:  ${props =>props.theme.colors["base-title"]};
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+      }
+    }
+  strong {
+   display: block;
+   font-size: 1rem;
+   color: ${props =>props.theme.colors["base-text"]};
+  }
+
+  &:hover {
+    border: 1px solid ${props=>props.theme.colors["base-subtitle"]};
+  }
+ 
+`;
+
+ 
+   
+
