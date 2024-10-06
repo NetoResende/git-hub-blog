@@ -8,17 +8,56 @@ import {
   PublicattedContent,
 } from "./styled";
 import { FormInput } from "./components/Form";
+import {  useEffect, useState } from "react";
+import { formatDistanceToNow } from "date-fns";
+import { ptBR } from "date-fns/locale";
+import { IssuesProps } from "../../contexts/IssueContext";
+import { useNavigate } from "react-router-dom";
+import { api } from "../../lib/axios";
+
+export interface GitHubBlogProps {
+  avatar_url: string;
+  login: string;
+  followers: number;
+  public_repos: number;
+}
 
 export function Home() {
+  const [ gitBlog, setGitBlog ] = useState<GitHubBlogProps>(
+    {} as GitHubBlogProps
+  );
+  const [issues, setIssues] = useState<IssuesProps[]>([]);
+  const navigate = useNavigate()
+
+  async function BucaGitHubBlog() {
+    const resposta = await api.get("users/NetoResende");
+    const data = resposta.data;
+    setGitBlog(data);
+  }
+  async function GitReposIssues() {
+    const issues = await api.get("repos/NetoResende/git-hub-blog/issues");
+    const repo = issues.data;
+    setIssues(repo); 
+  }
+
+  useEffect(() => {
+    BucaGitHubBlog();
+    GitReposIssues();
+  }, []);
+
+  async function CardNavigate(){
+    navigate('/issue')
+   console.log('oi teste');
+}
+
   return (
     <div>
       <ProfileContainer>
         <ProfileContent>
-          <img src="https://github.com/netoresende.png" alt="" />
           <AsideContent>
             <header>
-              <h1>Neto Resende</h1>
-              <a href="#">
+              <h1>{gitBlog.login}</h1>
+              <a href="https://github.com/NetoResende">
                 <span>GITHUB</span>
                 <ArrowSquareOut size={28} />
               </a>
@@ -31,18 +70,18 @@ export function Home() {
               </h4>
             </main>
             <footer>
-              <a href="#">
+              <a href="https://github.com/NetoResende">
                 <GithubLogo size={24} color="#3a536b" />
-                <span>NetoResende</span>
+                <span>{gitBlog.login}</span>
               </a>
 
-              <a href="#">
+              <a href="https://app.rocketseat.com.br/">
                 <Buildings size={24} color="#3a536b" />
                 <span>Rocketseat</span>
               </a>
               <a href="#">
                 <Users size={24} color="#3a536b" />
-                <span>Seguidores</span>
+                <span>{gitBlog.followers} Seguidores </span>
               </a>
             </footer>
           </AsideContent>
@@ -50,52 +89,29 @@ export function Home() {
       </ProfileContainer>
       <PublicattedContent>
         <p>Publicações</p>
-        <span>5 Publicações</span>
+        <span>{issues.length} Publicações</span>
       </PublicattedContent>
-      <FormInput />
+      <FormInput  issues ={setIssues}/>
       <MainContainer>
-        <MainContent>
-          <header>
-            <p>JavaScript data types and data structures</p>
-            <span>há 2 dia</span>
-          </header>
-          <strong>
-            Lorem t onsectetur minima vel. Labore exercitationem impedit
-            incidunt consectetur iure nesciunt natus?
-          </strong>
-        </MainContent>
-        <MainContent>
-          <header>
-            <p>JavaScript data types and data structures</p>
-            <span>há 2 dia</span>
-          </header>
-          <strong>
-            Lorem t onsectetur minima vel. Labore exercitationem impedit
-            incidunt consectetur iure nesciunt natus?
-          </strong>
-        </MainContent>
-        <MainContent>
-          <header>
-            <p>JavaScript data types and data structures</p>
-            <span>há 2 dia</span>
-          </header>
-          <strong>
-            Lorem t onsectetur minima vel. Labore exercitationem impedit
-            incidunt consectetur iure nesciunt natus?
-          </strong>
-        </MainContent>
-        <MainContent>
-          <header>
-            <p>JavaScript data types and data structures</p>
-            <span>há 2 dia</span>
-          </header>
-          <strong>
-            Lorem t onsectetur minima vel. Labore exercitationem impedit
-            incidunt consectetur iure nesciunt natus?
-          </strong>
-        </MainContent>
+        {issues.map((issue) => {
+          return (
+            <div key={issue.id} onClick={CardNavigate}>
+              <MainContent >
+                <header>
+                  <p>{issue.title}</p>
+                  <span>
+                    {formatDistanceToNow(issue.updated_at, {
+                      addSuffix: true,
+                      locale: ptBR
+                    })}
+                  </span>
+                </header>
+                 <strong>{issue.body}</strong> 
+              </MainContent>
+            </div>
+          );
+        })}
       </MainContainer>
-
     </div>
   );
 }
