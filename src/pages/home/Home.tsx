@@ -8,18 +8,25 @@ import {
   PublicattedContent,
 } from "./styled";
 import { FormInput } from "./components/Form";
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import { IssuesProps } from "../../contexts/IssueContext";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../lib/axios";
+
 
 export interface GitHubBlogProps {
   avatar_url: string;
   login: string;
   followers: number;
   public_repos: number;
+}
+export interface IssuesProps {
+  id: number;
+  title: string;
+  number: number;
+  updated_at: string;
+  body: string
 }
 
 export function Home() {
@@ -39,16 +46,10 @@ export function Home() {
     const repo = issues.data;
     setIssues(repo); 
   }
-
   useEffect(() => {
     BucaGitHubBlog();
     GitReposIssues();
   }, []);
-
-  async function CardNavigate(){
-    navigate('/issue')
-   console.log('oi teste');
-}
 
   return (
     <div>
@@ -95,7 +96,7 @@ export function Home() {
       <MainContainer>
         {issues.map((issue) => {
           return (
-            <div key={issue.id} onClick={CardNavigate}>
+            <button key={issue.id} onClick={() => navigate(`/issue/${issue.number}`)}>
               <MainContent >
                 <header>
                   <p>{issue.title}</p>
@@ -108,7 +109,7 @@ export function Home() {
                 </header>
                  <strong>{issue.body}</strong> 
               </MainContent>
-            </div>
+            </button>
           );
         })}
       </MainContainer>

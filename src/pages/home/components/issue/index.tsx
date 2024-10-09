@@ -5,6 +5,7 @@ import {
   GithubLogo,
   MessengerLogo,
 } from "phosphor-react";
+import { useParams } from "react-router-dom"
 import {
   IssueContainer,
   IssueContent,
@@ -12,8 +13,48 @@ import {
   IssueContentMain,
   IssueIsede,
 } from "./styled";
+import { api } from "../../../../lib/axios";
+import { useEffect, useState } from "react";
+import { formatDistanceToNow } from "date-fns";
+import { ptBR } from "date-fns/locale";
+
+interface IssueIdProps {
+  title: string;
+  user: {
+    login: string;
+  };
+  updated_at: string;
+  comments: string;
+  body: string;
+}
 
 export function Issue() {
+  const { id } = useParams()
+  const [ issueId, setIssueId ] = useState<IssueIdProps>()
+
+
+  const getIssueId = async () => {
+    const issues = await api.get(`repos/NetoResende/git-hub-blog/issues/${id}`);
+    const IdIssue = issues.data
+   setIssueId(IdIssue)
+  }
+
+  const formattedDate = () => {
+    if (issueId?.updated_at) {
+      return formatDistanceToNow(issueId.updated_at, {
+        addSuffix: true,
+        locale: ptBR
+      })
+    }
+    return "";
+  }
+
+  useEffect(() => {
+    if (id) {
+      getIssueId();
+    }
+  } ,[id])
+
   return (
     <IssueContainer>
       <IssueContent>
@@ -31,33 +72,30 @@ export function Issue() {
                 <ArrowSquareOut size={28} />
               </a>
             </header>
-            <h1>nome: dados pessoal</h1>
+            <h1>{issueId?.title}</h1>
           </aside>
 
           <footer>
             <a href="https://github.com/NetoResende">
               <GithubLogo size={24} color="#3a536b" />
-              <span>Meu nome</span>
+              <span>{issueId?.user.login} </span>
             </a>
 
-            <a href="https://app.rocketseat.com.br/">
+            <a href="##">
               <Calendar size={24} color="#3a536b" />
-              <span>Há 1 dia</span>
+              <span>
+              {formattedDate()}
+              </span>
             </a>
             <a href="#">
               <MessengerLogo size={24} color="#3a536b" />
-              <span> 5 comentários</span>
+              <span>{issueId?.comments}</span>
             </a>
           </footer>
         </IssueIsede>
       </IssueContent>
       <IssueContentMain>
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis, amet
-            molestias corporis animi distinctio minima doloremque laborum ullam
-            soluta doloribus esse labore illum nemo, fugit maiores, culpa in
-            harum vitae.
-          </p>
+          <p>{issueId?.body}</p>
           <main>
             <span>
             <a href="#">Dynamic Typing</a>
