@@ -101,7 +101,6 @@ export const MainContainer = styled.main`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
-  
 `;
 
 export const MainContent = styled.div`
@@ -121,6 +120,9 @@ export const MainContent = styled.div`
         font-size: 1.5rem;
         font-weight: bold;
         margin-bottom: 1rem;
+      }
+      span{
+        color: ${props => props.theme.colors['base-text']}
       }
     }
   strong {
