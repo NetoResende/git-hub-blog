@@ -58,29 +58,31 @@ export function Home() {
           <AsideContent>
             <header>
               <h1>{gitBlog.login}</h1>
-              <a href="https://github.com/NetoResende">
+              <a href="https://github.com/NetoResende" target="_blank">
                 <span>GITHUB</span>
                 <ArrowSquareOut size={28} />
               </a>
             </header>
             <main>
               <h4>
-                La dolos amet obcaecati neque aperiam molestiae sint ea
-                necessitatibus nemo voluptatibus sed maxime eius
-                oditgrgsrdgdgsdfgasfd!
+                Projeto Gut-Hub blog, Desenvolvido com React e TypeScript. !
+                Muito bacana a performace dessa aplicação, Neste projeto usei a biblioteca Zod,
+                 para fazer validações , axios para as requisições api... E usei outras coias a mais o que deixou o projeto muito mas interessante e peformático.
+                 Essa aplicação traz os botões de acesso para a página do github, A instituição Rocketseat e os seguidores da página.
+                 Um campo que fitra as Issues apresentadas a baixo. 
               </h4>
             </main>
             <footer>
-              <a href="https://github.com/NetoResende">
+              <a href="https://github.com/NetoResende" target="_blank">
                 <GithubLogo size={24} color="#3a536b" />
                 <span>{gitBlog.login}</span>
               </a>
 
-              <a href="https://app.rocketseat.com.br/">
+              <a href="https://app.rocketseat.com.br/" target="_blank">
                 <Buildings size={24} color="#3a536b" />
                 <span>Rocketseat</span>
               </a>
-              <a href="#">
+              <a href="#" >
                 <Users size={24} color="#3a536b" />
                 <span>{gitBlog.followers} Seguidores </span>
               </a>

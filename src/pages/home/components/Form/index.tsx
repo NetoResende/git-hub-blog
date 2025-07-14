@@ -3,7 +3,8 @@ import { FormContent } from "./styled";
 import * as zod from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { api } from "../../../../lib/axios";
-import { IssuesProps } from "../../../../contexts/IssueContext";
+// import { IssuesProps } from "../../../../contexts/IssueContext";
+import { IssuesProps } from "../../Home";
 
 const newFormValidattedSchema = zod.object({
   task: zod.string(),
